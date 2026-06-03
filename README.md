@@ -1,29 +1,33 @@
-# Cadastro Tomcat - Servlet + JSP
+# Cadastro Tomcat - Servlet e JSP
 
-Aplicação Java Web simples e leve, criada com **Servlet**, **JSP**, **Maven** e deploy em **Apache Tomcat**.
+Aplicação Java Web simples e leve desenvolvida com **Servlet**, **JSP**, **Maven** e deploy no **Apache Tomcat**.
 
-O objetivo do projeto é demonstrar o fluxo básico de uma aplicação Java Web tradicional: uma página JSP envia dados para um Servlet, o Servlet processa as informações e retorna uma página de resultado.
+O objetivo do projeto é demonstrar o fluxo básico de uma aplicação Java Web tradicional, onde uma página JSP envia dados de um formulário para um Servlet, que processa as informações e retorna uma página de resultado.
+
+---
 
 ## Tecnologias utilizadas
 
-- Java 17
-- Maven
+- Java 11
 - Jakarta Servlet
 - JSP
-- HTML
-- CSS
-- Apache Tomcat
-- WAR
+- HTML5
+- CSS3
+- Maven
+- Apache Tomcat 10
+
+---
 
 ## Funcionalidades
 
-- Página inicial com formulário
-- Envio de nome e e-mail
-- Validação simples de campos obrigatórios
-- Servlet recebendo dados via POST
-- Página de resultado exibindo as informações enviadas
-- Empacotamento em arquivo `.war`
-- Deploy no Apache Tomcat
+- Página inicial com formulário de cadastro
+- Envio de dados via método `POST`
+- Processamento dos dados em um Servlet
+- Validação simples dos campos
+- Exibição de mensagem de erro caso os campos estejam vazios
+- Página de resultado com os dados enviados
+
+---
 
 ## Estrutura do projeto
 
@@ -33,9 +37,11 @@ cadastro-tomcat-servlet-jsp/
  └── src/
      └── main/
          ├── java/
-         │   └── br/com/cadastrotomcat/
-         │       └── controller/
-         │           └── HomeServlet.java
+         │   └── br/
+         │       └── com/
+         │           └── cadastrotomcat/
+         │               └── controller/
+         │                   └── HomeServlet.java
          │
          └── webapp/
              ├── index.jsp
@@ -47,19 +53,27 @@ cadastro-tomcat-servlet-jsp/
                  └── web.xml
 ```
 
+---
+
 ## Fluxo da aplicação
 
 ```txt
 index.jsp
-   ↓ formulário POST
+   ↓
+Formulário envia dados via POST
+   ↓
 HomeServlet
-   ↓ processa os dados
+   ↓
+Validação dos dados
+   ↓
 resultado.jsp
-   ↓ exibe resposta
-Apache Tomcat
 ```
 
-## Como gerar o WAR
+---
+
+## Como executar o projeto
+
+### 1. Gerar o arquivo WAR
 
 Na raiz do projeto, execute:
 
@@ -73,52 +87,94 @@ Caso o Maven não esteja configurado no PATH, é possível usar o Maven interno 
 & "C:\Program Files\JetBrains\IntelliJ IDEA 2026.1.2\plugins\maven\lib\maven3\bin\mvn.cmd" clean package
 ```
 
-Após o build, o arquivo será gerado em:
+Após o build, o arquivo `.war` será gerado em:
 
 ```txt
 target/CadastroTomcat.war
 ```
 
-## Como fazer deploy no Tomcat
+---
 
-1. Gere o arquivo `.war` com Maven.
-2. Copie o arquivo:
+## Deploy no Apache Tomcat
+
+### 1. Copiar o WAR
+
+Copie o arquivo:
 
 ```txt
 target/CadastroTomcat.war
 ```
 
-3. Cole na pasta `webapps` do Tomcat:
+para a pasta `webapps` do Tomcat:
 
 ```txt
-apache-tomcat/webapps
+apache-tomcat-10.1.55/webapps
 ```
 
-4. Inicie o Tomcat:
+---
+
+### 2. Iniciar o Tomcat
+
+No Windows, execute:
 
 ```bash
 startup.bat
 ```
 
-ou, no Windows:
+Ou, para acompanhar os logs no terminal:
 
-```powershell
-& "C:\caminho\do\apache-tomcat\bin\startup.bat"
+```bash
+catalina.bat run
 ```
 
-## Como acessar
+---
 
-Depois do deploy, acesse:
+### 3. Acessar a aplicação
+
+Após o deploy, acesse:
 
 ```txt
 http://localhost:8080/CadastroTomcat
 ```
 
-ou:
+---
 
-```txt
-http://localhost:8080/CadastroTomcat/index.jsp
+## Observação sobre versão do Java
+
+Este projeto foi configurado para compilar com **Java 11**, garantindo compatibilidade com o Tomcat utilizado no ambiente de execução.
+
+No `pom.xml`, a configuração principal é:
+
+```xml
+<release>11</release>
 ```
+
+Caso o Tomcat esteja rodando com Java 11, o projeto também deve ser compilado para Java 11.
+
+---
+
+## Exemplo de uso
+
+1. Acesse a aplicação pelo navegador.
+2. Preencha o nome e o e-mail.
+3. Clique em **Enviar cadastro**.
+4. O Servlet processará os dados.
+5. A página de resultado exibirá as informações enviadas.
+
+---
+
+## Objetivo do projeto
+
+Este projeto foi criado com foco em praticar:
+
+- Criação de aplicação Java Web tradicional
+- Uso de Servlets
+- Uso de JSP
+- Empacotamento `.war`
+- Deploy manual no Apache Tomcat
+- Estrutura básica de projeto Maven Web
+
+---
 
 ## Autor
 
